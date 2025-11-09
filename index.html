@@ -3,7 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minecraft Street View - Francja</title>
+  <title>Mapa</title>
+  <!-- Ikona flagi Francji -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+<style>
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    #viewer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      background: black;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    #close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    #title-bar {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      z-index: 900;
+      font-family: sans-serif;
+    }
+  </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa</title>
 
   <!-- Ikona flagi Francji -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -59,59 +118,11 @@
       font-family: sans-serif;
     }
   </style>
-</head>
-<body>
-
-  <div id="title-bar">🇫🇷 Minecraft Street View: Francja</div>
+ </head>
+  <body>
+  <div>narazie tu nic nie ma</div>
   <div id="map"></div>
-
-  <div id="viewer">
-    <button id="close-btn">✖ Zamknij</button>
-    <iframe id="streetview" src=""></iframe>
-  </div>
-
-  <script>
-    // Granice Francji (pozwalają zobaczyć tylko ten kraj)
-    const franceBounds = L.latLngBounds(
-      [41.0, -5.5], // południowy-zachód
-      [51.5, 9.5]   // północny-wschód
-    );
-
-    // Utworzenie mapy z ograniczeniem
-    const map = L.map('map', {
-      maxBounds: franceBounds,
-      maxBoundsViscosity: 1.0,
-      zoomControl: false,
-      minZoom: 5,
-      maxZoom: 8,
-      attributionControl: false
-    }).setView([46.603354, 1.888334], 6);
-
-    // Warstwa mapy — tylko Francja (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      maxZoom: 19
-    }).addTo(map);
-
-    // Marker w Paryżu
-    const parisMarker = L.marker([48.8566, 2.3522]).addTo(map)
-      .bindPopup('Paryż - kliknij, aby zobaczyć Street View');
-
-    // Po kliknięciu — Street View z Google Maps
-    parisMarker.on('click', () => {
-      const viewer = document.getElementById('viewer');
-      const iframe = document.getElementById('streetview');
-      viewer.style.display = 'block';
-      iframe.src = 'https://www.google.com/maps/embed?pb=!4v1700238392980!6m8!1m7!1sCAoSLEFGMVFpcE5OT0lKVmF6QW0tV2trV2k5TTh6T1pVaC1wa0d5VmVpYlpoUG9p!2m2!1d48.8583701!2d2.2944813!3f0!4f0!5f0.7820865974627469';
-    });
-
-    // Zamknięcie Street View
-    document.getElementById('close-btn').addEventListener('click', () => {
-      const viewer = document.getElementById('viewer');
-      const iframe = document.getElementById('streetview');
-      iframe.src = '';
-      viewer.style.display = 'none';
-    });
-  </script>
+  <div id="viewer"></div>
+  <script><script>
 </body>
 </html>
-
